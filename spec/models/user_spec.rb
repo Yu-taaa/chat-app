@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録' do
+
     context '新規登録できる場合' do
       it "nameが空では登録できない" do
         @user.name = ''
@@ -23,6 +24,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
     end
+
     context '新規登録できない場合' do
 
       # 中略
@@ -47,6 +49,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
+      
       it '重複したemailが存在する場合は登録できない' do
         @user.save
         another_user = FactoryBot.build(:user, email: @user.email)
